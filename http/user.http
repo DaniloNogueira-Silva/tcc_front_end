@@ -1,0 +1,28 @@
+POST https://tcc-game-classes.vercel.app/user
+content-type: application/json
+
+{
+    "name": "danilo",
+    "email": "danilo@email.com",
+    "password": "123456",
+    "is_teacher": true
+}
+
+###
+
+POST https://tcc-game-classes.vercel.app/user/auth
+content-type: application/json
+
+{
+    "email": "danilo@email.com",
+    "password": "123456"
+}
+
+###
+
+GET https://tcc-game-classes.vercel.app/user
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxMjMyOGY1LTRhMWEtNDg2NS05Zjk1LTRkMjc2ODFhMDJiOCIsInVzZXJuYW1lIjoiZGFuaWxvIiwiZW1haWwiOiJkYW5pbG9AZW1haWwuY29tIiwiaXNfdGVhY2hlciI6dHJ1ZSwiaWF0IjoxNzM4NzEzNjU0LCJleHAiOjE3Mzg3MjA4NTR9.hICmWFklasR_obBj5j54urWLtrAfOnAPGfiVgdfpGVA
+
+
+###

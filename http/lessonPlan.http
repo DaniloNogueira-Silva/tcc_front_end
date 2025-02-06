@@ -1,0 +1,19 @@
+
+POST https://tcc-game-classes.vercel.app/lessonPlan
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxMjMyOGY1LTRhMWEtNDg2NS05Zjk1LTRkMjc2ODFhMDJiOCIsInVzZXJuYW1lIjoiZGFuaWxvIiwiZW1haWwiOiJkYW5pbG9AZW1haWwuY29tIiwiaXNfdGVhY2hlciI6dHJ1ZSwiaWF0IjoxNzM4Njk2NDAzLCJleHAiOjE3Mzg3MDM2MDN9.cLm8eRoNz_dNDjIuDFXstwpVBowX7ecHagCEkjhaYq8
+
+{
+    "teacher_id": "712328f5-4a1a-4865-9f95-4d27681a02b8",
+    "name": "Português",
+    "theme": "Conjugação dos Verbos"
+}
+
+###
+
+GET https://tcc-game-classes.vercel.app/lessonPlan
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxMjMyOGY1LTRhMWEtNDg2NS05Zjk1LTRkMjc2ODFhMDJiOCIsInVzZXJuYW1lIjoiZGFuaWxvIiwiZW1haWwiOiJkYW5pbG9AZW1haWwuY29tIiwiaXNfdGVhY2hlciI6dHJ1ZSwiaWF0IjoxNzM4ODgxNDg0LCJleHAiOjE3Mzg4ODg2ODR9.2Jk79E9H-wQ0rLi-e7rzaGcA0faj31iJty5u55G8rQc
+
+###
+
