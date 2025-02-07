@@ -1,17 +1,23 @@
-import { IGetLessonPlanResponse } from "@/types/IGetLessonPlan.interface";
 import axios from "axios";
 
 export class HttpRequest {
   private static url: string =
     process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3000";
-  private static token: string = localStorage.getItem("token") || "";
 
-  static async getAllLessonPlans(): Promise<IGetLessonPlanResponse[]> {
+  static getToken(): string | null {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("token");
+    }
+    return null; // Retorna `null` no servidor
+  }
+
+  static async getAllLessonPlans() {
     try {
-      console.log('token', this.token);
+      const token = this.getToken(); // Obtém o token de forma segura
+
       const response = await axios.get(`${this.url}/lessonPlan`, {
         headers: {
-          Authorization: `Bearer ${this.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -28,6 +34,11 @@ export class HttpRequest {
         email,
         password,
       });
+
+      if (typeof window !== "undefined") {
+        localStorage.setItem("token", response.data.token); // Salva o token apenas no cliente
+      }
+
       return response.data;
     } catch (error) {
       console.error("Erro ao fazer login:", error);
@@ -36,7 +47,9 @@ export class HttpRequest {
   }
 
   static async logout() {
-    localStorage.removeItem("token"); // 🔥 Remove o token ao fazer logout
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("token");
+    }
   }
 
   static async createUser(

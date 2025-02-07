@@ -1,4 +1,4 @@
-"use client";
+"use client"; // 🔥 Isso evita a renderização no servidor
 
 import { HttpRequest } from "@/utils/httpRequest";
 import { useRouter } from "next/navigation";
@@ -29,22 +29,19 @@ export default function AuthPage() {
 
     try {
       if (isRegister) {
-        // 📌 Criar usuário (Registro)
         await HttpRequest.createUser(
           formData.name,
           formData.email,
           formData.password,
           formData.is_teacher
         );
-        setIsRegister(false); 
+        setIsRegister(false);
       } else {
         const data = await HttpRequest.login(formData.email, formData.password);
-        localStorage.setItem("token", data);
-        router.push("/");
+        router.push("/"); // Redireciona após login
       }
     } catch (err) {
       setError("Erro ao processar a requisição.");
-      console.error(err);
     }
   };
 
