@@ -71,4 +71,71 @@ export class HttpRequest {
       throw error;
     }
   }
+
+  static async createLessonPlan(
+    name: string,
+    theme: string,
+    teacher_id: string
+  ) {
+    try {
+      const token = this.getToken();
+
+      const response = await axios.post(
+        `${this.url}/lessonPlan`,
+        { name, theme, teacher_id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao criar plano de aula:", error);
+      throw error;
+    }
+  }
+
+  static async updateLessonPlan(
+    id: string,
+    name: string,
+    theme: string,
+  ): Promise<void> {
+    try {
+      const token = this.getToken();
+
+      await axios.patch(
+        `${this.url}/lessonPlan/${id}`,
+        { name, theme },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return;
+    } catch (error) {
+      console.error("Erro ao atualizar plano de aula:", error);
+      throw error;
+    }
+  }
+
+  static async deleteLessonPlan(id: string): Promise<void> {
+    try {
+      const token = this.getToken();
+
+      await axios.delete(`${this.url}/lessonPlan/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return;
+    } catch (error) {
+      console.error("Erro ao deletar plano de aula:", error);
+      throw error;
+    }
+  }
 }
