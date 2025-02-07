@@ -6,5 +6,5 @@ export interface IGetLessonPlanResponse {
   name: string;
   theme: string;
   classes?: IGetClassesResponse[];
-  teacher?: IGetUserResponse;
+  teacher: IGetUserResponse;
 }

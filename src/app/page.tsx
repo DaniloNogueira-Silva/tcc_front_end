@@ -7,8 +7,14 @@ import { IGetLessonPlanResponse } from "@/types/IGetLessonPlan.interface";
 import Layout from "@/components/Layout";
 import { useAuth } from "@/hooks/useAuth";
 
+const themeImages: Record<string, string> = {
+  FLOREST: "/themes/florest.png",
+  CAVERN: "/themes/cavern.png",
+  DUNGEON: "/themes/dungeon.png",
+};
+
 export default function Home() {
-  useAuth()
+  useAuth();
   const [lessonPlans, setLessonPlans] = useState<IGetLessonPlanResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -36,29 +42,24 @@ export default function Home() {
       {loading && <p>Carregando...</p>}
       {error && <p className="text-red-500">{error}</p>}
 
-      <ul className="mt-4 space-y-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
         {lessonPlans.map((plan) => (
-          <li key={plan.id} className="border p-4 rounded-lg shadow-sm">
-            <h3 className="text-lg font-semibold">{plan.name}</h3>
-            <p className="text-gray-600">Tema: {plan.theme}</p>
-
-            {plan?.teacher && (
-              <p className="text-gray-700">Professor: {plan.teacher.name}</p>
-            )}
-
-            {plan?.classes && (
-              <div className="mt-2">
-                <p className="font-semibold">Turmas:</p>
-                <ul className="list-disc pl-5 text-gray-700">
-                  {plan.classes.map((classItem) => (
-                    <li key={classItem.id}>{classItem.name}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </li>
+          <div
+            key={plan.id}
+            className="border border-teal-500 rounded-lg shadow-md overflow-hidden bg-white transition-transform transform hover:scale-105 hover:shadow-lg"
+          >
+            <img
+              src={themeImages[plan.theme.toUpperCase()] || "/images/default.png"}
+              alt={plan.theme}
+              className="w-full h-48 object-cover"
+            />
+            <div className="p-4">
+              <h3 className="text-lg font-semibold">{plan.name}</h3>
+              <p className="text-gray-600">Aulas: {plan?.classes?.length || 0}</p>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </Layout>
   );
 }
