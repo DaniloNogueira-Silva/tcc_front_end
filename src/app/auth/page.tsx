@@ -37,8 +37,8 @@ export default function AuthPage() {
         );
         setIsRegister(false);
       } else {
-        const data = await HttpRequest.login(formData.email, formData.password);
-        router.push("/"); // Redireciona após login
+        await HttpRequest.login(formData.email, formData.password);
+        router.push("/");
       }
     } catch (err) {
       setError("Erro ao processar a requisição.");

@@ -36,7 +36,7 @@ export class HttpRequest {
       });
 
       if (typeof window !== "undefined") {
-        localStorage.setItem("token", response.data.token); // Salva o token apenas no cliente
+        localStorage.setItem("token", response.data); // Salva o token apenas no cliente
       }
 
       return response.data;
