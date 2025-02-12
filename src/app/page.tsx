@@ -28,9 +28,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingPlan, setEditingPlan] = useState<IGetLessonPlanResponse | null>(
-    null
-  );
+  const [editingPlan, setEditingPlan] = useState<IGetLessonPlanResponse | null>(null);
   const [newPlan, setNewPlan] = useState({ name: "", theme: "" });
   const [userId, setUserId] = useState<string | null>(null);
 
@@ -119,44 +117,49 @@ export default function Home() {
         {loading && <p>Carregando...</p>}
         {error && <p className="text-red-500">{error}</p>}
 
-        <Link href="./maps">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-            {lessonPlans.map((plan) => (
-              <div
-                key={plan.id}
-                className="border border-teal-500 rounded-lg shadow-md overflow-hidden bg-white transition-transform transform hover:scale-105 hover:shadow-lg relative"
-              >
+        {/* GRID DE PLANOS */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+          {lessonPlans.map((plan) => (
+            <div
+              key={plan.id}
+              className="border border-teal-500 rounded-lg shadow-md overflow-hidden bg-white transition-transform transform hover:scale-105 hover:shadow-lg relative"
+            >
+              {/* Link apenas no nome e imagem */}
+              <Link href="./maps">
                 <img
-                  src={
-                    themeImages[plan.theme.toUpperCase()] || "/images/default.png"
-                  }
+                  src={themeImages[plan.theme.toUpperCase()] || "/images/default.png"}
                   alt={plan.theme}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-48 object-cover cursor-pointer"
                 />
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold">{plan.name}</h3>
-                  <p className="text-gray-600">Aulas: {plan?.classes?.length || 0}</p>
-                </div>
+              </Link>
 
-                {/* Botões de Editar e Excluir */}
-                <div className="absolute bottom-2 right-2 flex space-x-2">
-                  <button
-                    onClick={() => handleEditPlan(plan)}
-                    className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
-                  >
-                    <Pencil size={16} />
-                  </button>
-                  <button
-                    onClick={() => handleDeletePlan(plan.id)}
-                    className="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-                  >
-                    <Trash size={16} />
-                  </button>
-                </div>
+              <div className="p-4">
+                <Link href="./maps">
+                  <h3 className="text-lg font-semibold cursor-pointer hover:underline">
+                    {plan.name}
+                  </h3>
+                </Link>
+                <p className="text-gray-600">Aulas: {plan?.classes?.length || 0}</p>
               </div>
-            ))}
-          </div>
-        </Link>
+
+              {/* Botões de Editar e Excluir */}
+              <div className="absolute bottom-2 right-2 flex space-x-2">
+                <button
+                  onClick={() => handleEditPlan(plan)}
+                  className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
+                >
+                  <Pencil size={16} />
+                </button>
+                <button
+                  onClick={() => handleDeletePlan(plan.id)}
+                  className="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                >
+                  <Trash size={16} />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* MODAL */}
